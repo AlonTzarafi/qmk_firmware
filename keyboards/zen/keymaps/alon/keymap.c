@@ -74,11 +74,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   
   [_RGB_KP] = LAYOUT( \
-    _______, _______,        _______, _______, _______,   _______,                   XXXXXXX, KC_NUMLOCK, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, XXXXXXX, \
+    _______, _______,        _______, _______, _______,   _______,                   XXXXXXX, KC_NUMLOCK, KC_KP_SLASH, KC_KP_ASTERISK, KC_KP_MINUS, KC_BSPC, \
     _______, RGB_SAI,        RGB_VAI, RGB_SAD, RESET,     _______,                   XXXXXXX, KC_KP_7,    KC_KP_8,     KC_KP_9,        KC_KP_PLUS,  XXXXXXX, \
     _______, RGB_HUD,        RGB_VAD, RGB_HUI, _______,   _______,                   XXXXXXX, KC_KP_4,    KC_KP_5,     KC_KP_6,        KC_KP_PLUS,  XXXXXXX, \
-    _______, RGB_TOG,        RGB_MOD, RGB_M_R, _______,   _______,                   XXXXXXX, KC_KP_1,    KC_KP_2,     KC_KP_3,        KC_KP_ENTER, XXXXXXX, \
-    _______, KC_APPLICATION, _______, _______, _______,   _______, _______, _______, _______, KC_KP_0,    KC_KP_0,     KC_KP_DOT,      KC_KP_ENTER, XXXXXXX  \
+    _______, RGB_TOG,        RGB_MOD, RGB_M_R, _______,   _______,                   XXXXXXX, KC_KP_1,    KC_KP_2,     KC_KP_3,        KC_KP_ENTER, KC_RSFT, \
+    _______, KC_APPLICATION, _______, _______, _______,   _______, _______, _______, _______, KC_KP_0,    KC_KP_0,     KC_KP_DOT,      KC_KP_ENTER, KC_RCTL  \
   ),
   
 };
