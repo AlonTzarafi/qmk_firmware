@@ -1,0 +1,6 @@
+* TODO Re-solder full-hand RGB part
+* TODO Add NKRO
+* TODO Enabling ~"EXTRA_ENCODERS_ENABLE"~ only on master = fail
+* TODO Enabling ~"OLED_DRIVER_ENABLE"~ only on one side works. Problem with LAG. try actually having OLED
+* TODO Check the one OLED didn't completely die
+* TODO ADd cone feet
