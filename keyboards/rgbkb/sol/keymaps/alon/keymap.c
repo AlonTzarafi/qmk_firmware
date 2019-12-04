@@ -1,12 +1,9 @@
-#define OLED_TIMEOUT            = 0
 #include QMK_KEYBOARD_H
 
 #ifdef PROTOCOL_LUFA
 #include "lufa.h"
 #include "split_util.h"
 #endif
-
-#define OLED_TIMEOUT            = 0
     
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -54,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    *                                    `-------------'  `-------------'
    */
   [_QWERTY] = LAYOUT( \
-    KC_GESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5, KC_MINS,  KC_EQL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC, \
+     KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5, KC_MINS,  KC_EQL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC, \
      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, KC_LBRC, KC_RBRC,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS, \
          FN,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G, KC_LPRN, KC_RPRN,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
     KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_LCBR, KC_RCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
@@ -110,8 +107,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*                                                _______, _______, _______, _______ \ */
   /* ), */
   [_FN] = LAYOUT( \
-    _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, _______, _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
-    _______, KC_PGUP,   KC_UP, KC_PGDN,  KC_F11,  KC_F12, _______, _______, _______, KC_PGUP,   KC_UP, KC_PGDN,  KC_F11,  KC_F12, \
+   KC_GRAVE,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, _______, _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
+    _______, KC_PGUP,   KC_UP, KC_PGDN,  KC_F11,  KC_F12, _______, _______, _______, KC_PGUP,   KC_UP, KC_PGDN, KC_LBRC, KC_RBRC, \
     KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END , _______, _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT,  KC_END,  KC_END, \
     _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, RGBSTF , _______,  KC_ENT, _______, _______, _______, _______, KC_VOLD, KC_VOLU, _______, _______, \
@@ -119,11 +116,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   
   [_MIRROR] = LAYOUT( \
-    KC_BSPC,    KC_0,    KC_9,    KC_8,    KC_7,    KC_6, KC_MINS,  KC_EQL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC, \
-    KC_BSLS,    KC_P,    KC_O,    KC_I,    KC_U,    KC_Y, KC_LBRC, KC_RBRC,    KC_Y,    KC_U,  KC_INS,    KC_O, KC_PSCR, KC_BSLS, \
-    KC_QUOT, KC_SCLN,    KC_L,    KC_K,    KC_J,    KC_H, KC_LPRN, KC_RPRN,    KC_H,    KC_J,    KC_K, KC_CAPS, KC_SCLN, KC_QUOT, \
-     KC_ENT, KC_SLSH,  KC_DOT, KC_COMM,    KC_M,    KC_N, KC_LCBR, KC_RCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT, \
-    KC_RCTL, KC_RGUI,  KC_EQL, _______,      FN,  KC_SPC,  KC_MUTE,KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
+    KC_BSPC,    KC_0,    KC_9,    KC_8,    KC_7,    KC_6,  KC_EQL, KC_MINS,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC, \
+    KC_BSLS,    KC_P,    KC_O,    KC_I,    KC_U,    KC_Y, KC_RBRC, KC_LBRC,    KC_Y,    KC_U,  KC_INS,    KC_O, KC_PSCR, KC_BSLS, \
+    KC_QUOT, KC_SCLN,    KC_L,    KC_K,    KC_J,    KC_H, KC_RPRN, KC_LPRN,    KC_H,    KC_J,    KC_K, KC_CAPS, KC_SCLN, KC_QUOT, \
+     KC_ENT, KC_SLSH,  KC_DOT, KC_COMM,    KC_M,    KC_N, KC_RCBR, KC_LCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT, \
+    KC_RCTL, KC_RGUI,  KC_EQL, _______,  RGBSTF,  KC_SPC,  KC_MUTE,KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
                                                   KC_SPC,  KC_DEL,  KC_ENT,  KC_SPC \
   ),
   
@@ -297,9 +294,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   /*   } */
   /* } */
     if (clockwise) {
-        tap_code(KC_VOLD);
-    } else {
         tap_code(KC_VOLU);
+    } else {
+        tap_code(KC_VOLD);
     }
 }
 #endif
@@ -437,5 +434,3 @@ void oled_task_user(void) {
 }
 
 #endif
-
-#define OLED_TIMEOUT            = 0
