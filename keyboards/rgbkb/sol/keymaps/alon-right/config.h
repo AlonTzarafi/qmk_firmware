@@ -20,17 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+
 // place overrides here
 
 #define OLED_TIMEOUT 0
-#define MK_3_SPEED
-#define MOUSEKEY_DELAY 200
-#define MOUSEKEY_INTERVAL 35
-/* Defaults: */
-/* #define MK_C_OFFSET_0 1   */
-/* #define MK_C_OFFSET_1 4 */
-/* #define MK_C_OFFSET_2 32 */
-/* Mine: */
-#define MK_C_OFFSET_0 4
-#define MK_C_OFFSET_1 32
-#define MK_C_OFFSET_2 64

@@ -8,9 +8,17 @@
 
 
 # Keycode Options
-# NKRO_ENABLE             = yes        # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+BOOTMAGIC_ENABLE        = no        # Virtual DIP switch configuration(
+MOUSEKEY_ENABLE         = yes        # Mouse keys
+EXTRAKEY_ENABLE         = yes       # Audio control and System control
+UNICODE_ENABLE          = no        # Unicode keycodes
+NKRO_ENABLE             = yes        # Nkey Rollover - if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
 
 # RGB Options
+RGB_MATRIX_KEYPRESSES   = yes        # Enable reactive per-key effects.
+RGB_MATRIX_FRAMEBUFFER_EFFECTS = yes # Enable frame buffer effects like the typing heatmap.
+
+RGB_MATRIX_ENABLE       = WS2812    # Enable per-key coordinate based RGB effects. Do not enable with RGBlight
 RGB_MATRIX_KEYPRESSES   = yes        # Enable reactive per-key effects.
 RGB_MATRIX_FRAMEBUFFER_EFFECTS = yes # Enable frame buffer effects like the typing heatmap.
 

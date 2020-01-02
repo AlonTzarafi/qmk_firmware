@@ -14,6 +14,8 @@ enum layer_number {
     /* _COLEMAK, */
     _FN,
     _MIRROR,
+    _ENC_VOLUME,
+    _ENC_MOUSE,
     _RGBSTF,
     _ADJ
 };
@@ -28,7 +30,9 @@ enum layer_number {
 
 enum custom_keycodes {
   RGBRST = SAFE_RANGE,
-  RGB_MENU
+  RGB_MENU,
+  ENC_VOL,
+  ENC_MOUS
 };
 
 #define FN_ESC   LT(_FN, KC_ESC)
@@ -54,8 +58,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5, KC_MINS,  KC_EQL,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC, \
      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, KC_LBRC, KC_RBRC,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS, \
          FN,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G, KC_LPRN, KC_RPRN,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
-    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_LCBR, KC_RCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-    KC_LCTL, KC_LGUI, KC_LALT,  MIRROR,      FN,  KC_SPC,  KC_MUTE,KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
+    KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, KC_RCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
+    KC_LCTL, KC_LGUI, KC_LALT,  MIRROR,      FN, KC_MUTE, KC_MUTE, KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
                                                   KC_SPC,  KC_DEL,  KC_ENT,  KC_SPC \
   ),
 
@@ -119,17 +123,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_BSPC,    KC_0,    KC_9,    KC_8,    KC_7,    KC_6,  KC_EQL, KC_MINS,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC, \
     KC_BSLS,    KC_P,    KC_O,    KC_I,    KC_U,    KC_Y, KC_RBRC, KC_LBRC,    KC_Y,    KC_U,  KC_INS,    KC_O, KC_PSCR, KC_BSLS, \
     KC_QUOT, KC_SCLN,    KC_L,    KC_K,    KC_J,    KC_H, KC_RPRN, KC_LPRN,    KC_H,    KC_J,    KC_K, KC_CAPS, KC_SCLN, KC_QUOT, \
-     KC_ENT, KC_SLSH,  KC_DOT, KC_COMM,    KC_M,    KC_N, KC_RCBR, KC_LCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT, \
-    KC_RCTL, KC_RGUI,  KC_EQL, _______,  RGBSTF,  KC_SPC,  KC_MUTE,KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
-                                                  KC_SPC,  KC_DEL,  KC_ENT,  KC_SPC \
+     KC_ENT, KC_SLSH,  KC_DOT, KC_COMM,    KC_M,    KC_N, _______, KC_LCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ENT, \
+    KC_RCTL,  KC_EQL, KC_MINS, _______,  RGBSTF, _______, _______, KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
+                                                 _______, _______,  KC_ENT,  KC_SPC \
   ),
   
   [_RGBSTF] =  LAYOUT( \
       KC_F1,  KC_F10,   KC_F9,   KC_F8,   KC_F7,   KC_F6, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, RGB_SAD, RGB_VAI, RGB_SAI,   RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, RGB_HUD, RGB_VAD, RGB_HUI,  RGBRST, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, RGB_SPD, XXXXXXX, RGB_SPI,RGB_MENU, _______, _______, _______, _______, RGB_SPI, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
-    _______, RGB_TOG, RGB_MOD, _______, _______, _______, _______, _______, _______, RGB_SPD, RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, \
+    _______, RGB_SPD, XXXXXXX, RGB_SPI,RGB_MENU, _______, ENC_VOL, _______, _______, RGB_SPI, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
+    _______, RGB_TOG, RGB_MOD, _______, _______,ENC_MOUS, ENC_VOL, _______, _______, RGB_SPD, RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, \
                                                  _______, _______, _______, _______ \
   ),
 
@@ -156,7 +160,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, RGB_SPD, _______, RGB_SPI, _______, _______, _______, _______, _______, RGB_SPI, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
     _______, _______, _______, RGB_MOD, _______, _______, _______, _______, _______, RGB_SPD, RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, \
                                                  _______, _______, _______, _______ \
-  )
+  ),
+
+  /* --------- Encoder layers ---------- */
+  
+  [_ENC_VOLUME] =  LAYOUT( \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, KC_MUTE, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, KC_MUTE, KC_MUTE, _______, _______, _______, _______,_______, _______, _______, \
+                                                 _______, _______, _______, _______ \
+  ),
+  [_ENC_MOUSE] =  LAYOUT( \
+    _______, _______, _______, _______, _______, _______, KC_ACL2, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, KC_ACL1, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, KC_ACL0, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, KC_BTN3, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______,_______, _______, _______, \
+                                                 _______, _______, _______, _______ \
+  ),
+  
+  
 };
 
 // For RGBRST Keycode
@@ -293,10 +318,97 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   /*     tap_code(KC_VOLU); */
   /*   } */
   /* } */
-    if (clockwise) {
-        tap_code(KC_VOLU);
-    } else {
-        tap_code(KC_VOLD);
+
+    /* layout: */
+    /* 2        |        X */
+    /* 1, 0     |    3 , X */
+
+    bool volume_mode = layer_state_is(_ENC_VOLUME);
+    if (!layer_state_is(_ENC_MOUSE)) {
+        /* No other modes: default to volume mode */
+        volume_mode = true;
+    }
+    
+    if (volume_mode) {
+        switch (index) {
+        case 0:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
+            break;
+        case 1:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+                tap_code(KC_VOLD);
+            }
+            break;
+        case 2:
+            if (!layer_state_is(_FN)) {
+                if (clockwise) {
+                    tap_code(KC_WH_D);
+                } else {
+                    tap_code(KC_WH_U);
+                }
+            } else {
+                if (clockwise) {
+                    tap_code(KC_WH_R);
+                } else {
+                    tap_code(KC_WH_L);
+                }
+            }
+            break;
+        case 3:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
+            break;
+        }
+    } else if (layer_state_is(_ENC_MOUSE)) {
+        switch (index) {
+        case 0:
+            if (clockwise) {
+                tap_code(KC_MS_R);
+            } else {
+                tap_code(KC_MS_L);
+            }
+            break;
+        case 1:
+            if (clockwise) {
+                tap_code(KC_MS_D);
+            } else {
+                tap_code(KC_MS_U);
+            }
+            break;
+        case 2:
+            if (!layer_state_is(_FN)) {
+                if (clockwise) {
+                    tap_code(KC_WH_D);
+                } else {
+                    tap_code(KC_WH_U);
+                }
+            } else {
+                if (clockwise) {
+                    tap_code(KC_WH_R);
+                } else {
+                    tap_code(KC_WH_L);
+                }
+            }
+            break;
+        case 3:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
+            break;
+        }
     }
 }
 #endif
@@ -347,6 +459,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 #endif
       return false;
+  case ENC_VOL:
+      if (record->event.pressed) {
+          layer_on(_ENC_VOLUME);
+          layer_off(_ENC_MOUSE);
+      }
+      return false;
+  case ENC_MOUS:
+      if (record->event.pressed) {
+          layer_on(_ENC_MOUSE);
+          layer_off(_ENC_VOLUME);
+      }
+      return false;
   }
   return true;
 }
@@ -354,13 +478,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 // OLED Driver Logic
 #ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  /* if (is_keyboard_master()) */
-  /* return rotation; */
+    /* if (is_keyboard_master()) */
+    /*    return rotation; */
     /* return OLED_ROTATION_270; */
-
     
-/* return OLED_ROTATION_270; */
-    return OLED_ROTATION_180;
+    
+    /* return OLED_ROTATION_270; */
+    /* return OLED_ROTATION_180; */
     /* return OLED_ROTATION_90; */
 }
 
@@ -430,7 +554,7 @@ void oled_task_user(void) {
     /* render_status(); */
     
     render_logo();
-    oled_scroll_left();
+    /* oled_scroll_left(); */
 }
 
 #endif
