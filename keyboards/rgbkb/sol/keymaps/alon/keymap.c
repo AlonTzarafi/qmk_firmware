@@ -16,9 +16,14 @@ enum layer_number {
     _MIRROR,
     _ENC_VOLUME,
     _ENC_MOUSE,
+    _ENC_PHOTOSHOP,
     _RGBSTF,
     _ADJ
 };
+
+// For Photoshop:
+uint8_t opacity = 60;
+uint8_t opacity_increment = 10;
 
 // Keycode defines for layers
 #define QWERTY   DF(_QWERTY)
@@ -32,7 +37,11 @@ enum custom_keycodes {
   RGBRST = SAFE_RANGE,
   RGB_MENU,
   ENC_VOL,
-  ENC_MOUS
+  ENC_MOUS,
+  ENC_PHOTOSHOP,
+  ENC_OPACI_1,
+  ENC_OPACI_2,
+  ENC_OPACI_3,
 };
 
 #define FN_ESC   LT(_FN, KC_ESC)
@@ -129,12 +138,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   
   [_RGBSTF] =  LAYOUT( \
-      KC_F1,  KC_F10,   KC_F9,   KC_F8,   KC_F7,   KC_F6, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, RGB_SAD, RGB_VAI, RGB_SAI,   RESET, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, RGB_HUD, RGB_VAD, RGB_HUI,  RGBRST, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, RGB_SPD, XXXXXXX, RGB_SPI,RGB_MENU, _______, ENC_VOL, _______, _______, RGB_SPI, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
-    _______, RGB_TOG, RGB_MOD, _______, _______,ENC_MOUS, ENC_VOL, _______, _______, RGB_SPD, RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, \
-                                                 _______, _______, _______, _______ \
+      KC_F1,  KC_F10,   KC_F9,   KC_F8,   KC_F7,   KC_F6, _______      , _______, _______, _______, _______, _______, _______, _______, \
+    _______, RGB_SAD, RGB_VAI, RGB_SAI,   RESET, _______, _______      , _______, _______, _______, _______, _______, _______, _______, \
+    _______, RGB_HUD, RGB_VAD, RGB_HUI,  RGBRST, _______, _______      , _______, _______, _______, _______, _______, _______, _______, \
+    _______, RGB_SPD, XXXXXXX, RGB_SPI,RGB_MENU, _______, ENC_PHOTOSHOP, _______, _______, RGB_SPI, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
+    _______, RGB_TOG, RGB_MOD, _______, _______,ENC_MOUS, ENC_VOL      , _______, _______, RGB_SPD, RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, \
+                                                 _______, _______      , _______, _______ \
   ),
 
   /* ADJ
@@ -179,6 +188,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, KC_BTN3, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______, _______,_______, _______, _______, \
                                                  _______, _______, _______, _______ \
+  ),
+  [_ENC_PHOTOSHOP] =  LAYOUT( \
+    _______, _______, _______, _______, _______, _______, ENC_OPACI_1, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, ENC_OPACI_2, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, ENC_OPACI_3, _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, KC_E       , _______, _______, _______, _______, _______, _______, _______, \
+    _______, _______, _______, _______, _______, KC_B   , KC_M       , _______, _______, _______, _______,_______, _______, _______, \
+                                                 _______, _______    , _______, _______ \
   ),
   
   
@@ -326,7 +343,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     clockwise = !clockwise;
     
     bool volume_mode = layer_state_is(_ENC_VOLUME);
-    if (!layer_state_is(_ENC_MOUSE)) {
+    if (!layer_state_is(_ENC_MOUSE) && !layer_state_is(_ENC_PHOTOSHOP)) {
         /* No other modes: default to volume mode */
         volume_mode = true;
     }
@@ -411,6 +428,99 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             }
             break;
         }
+    } else if (layer_state_is(_ENC_PHOTOSHOP)) {
+        // ---------------------- PHOTOSHOP !!!!!!!!!!!!!!
+        switch (index) {
+        case 0:
+             if (!layer_state_is(_FN)) {
+                 if (clockwise) {
+                     register_code(KC_LSFT);
+                     tap_code(KC_RBRC);
+                     unregister_code(KC_LSFT);
+                 } else {
+                     register_code(KC_LSFT);
+                     tap_code(KC_LBRC);
+                     unregister_code(KC_LSFT);
+                 }
+             } else {
+                 if (clockwise) {
+                     tap_code(KC_VOLU);
+                 } else {
+                     tap_code(KC_VOLD);
+                 }
+             }
+             break;
+        case 1:
+            if (!layer_state_is(_FN)) {
+                if (clockwise) {
+                    tap_code(KC_RBRC);
+                } else {
+                    tap_code(KC_LBRC);
+                }
+            } else {
+                if (clockwise) {
+                    tap_code(KC_VOLU);
+                    tap_code(KC_VOLU);
+                } else {
+                    tap_code(KC_VOLD);
+                    tap_code(KC_VOLD);
+                }
+            }
+            break;
+        case 2:
+            if (!layer_state_is(_FN)) {
+                if (clockwise) {
+                    if (opacity > 100 - opacity_increment) {
+                        opacity = 100;
+                    } else {
+                        opacity += opacity_increment;
+                    }
+                } else {
+                    if (opacity < 0 + opacity_increment) {
+                        opacity = 0;
+                    } else {
+                        opacity -= opacity_increment;
+                    }
+                }
+                
+                uint8_t opacity_to_type = opacity;
+                if (opacity_to_type == 0) {
+                    opacity_to_type = 1;
+                }
+                
+                uint8_t last = opacity_to_type % 10;
+                uint8_t first = opacity_to_type / 10 % 10;
+                uint8_t digits[2] = {first, last};
+                for(int i = 0; i < 2; ++i) {
+                    switch (digits[i]) {
+                    case 0: tap_code(KC_0); break;
+                    case 1: tap_code(KC_1); break;
+                    case 2: tap_code(KC_2); break;
+                    case 3: tap_code(KC_3); break;
+                    case 4: tap_code(KC_4); break;
+                    case 5: tap_code(KC_5); break;
+                    case 6: tap_code(KC_6); break;
+                    case 7: tap_code(KC_7); break;
+                    case 8: tap_code(KC_8); break;
+                    case 9: tap_code(KC_9); break;
+                    }
+                }
+            } else {
+                if (clockwise) {
+                    tap_code(KC_DOT);
+                } else {
+                    tap_code(KC_COMMA);
+                }
+            }
+            break;
+        case 3:
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
+            break;
+        }
     }
 }
 #endif
@@ -465,13 +575,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
           layer_on(_ENC_VOLUME);
           layer_off(_ENC_MOUSE);
+          layer_off(_ENC_PHOTOSHOP);
       }
       return false;
   case ENC_MOUS:
       if (record->event.pressed) {
-          layer_on(_ENC_MOUSE);
           layer_off(_ENC_VOLUME);
+          layer_on(_ENC_MOUSE);
+          layer_off(_ENC_PHOTOSHOP);
       }
+      return false;
+  case ENC_PHOTOSHOP:
+      if (record->event.pressed) {
+          layer_off(_ENC_VOLUME);
+          layer_off(_ENC_MOUSE);
+          layer_on(_ENC_PHOTOSHOP);
+      }
+      return false;
+  case ENC_OPACI_1:
+      opacity_increment = 5;
+      return false;
+  case ENC_OPACI_2:
+      opacity_increment = 10;
+      return false;
+  case ENC_OPACI_3:
+      opacity_increment = 20;
       return false;
   }
   return true;
