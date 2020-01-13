@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, KC_LBRC, KC_RBRC,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, KC_BSLS, \
          FN,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G, KC_LPRN, KC_RPRN,    KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT, \
     KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE, KC_RCBR,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_RSFT, \
-    KC_LCTL, KC_LGUI, KC_LALT,  MIRROR,      FN, KC_MUTE, KC_MUTE, KC_MUTE,  KC_SPC,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
+    KC_LCTL, KC_LGUI, KC_LALT,  MIRROR,      FN, KC_MUTE, KC_MUTE, KC_MUTE, KC_LCTL,      FN, KC_MINS,  KC_EQL, KC_RGUI, KC_RCTL, \
                                                   KC_SPC,  KC_DEL,  KC_ENT,  KC_SPC \
   ),
 
@@ -111,7 +111,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /*                                                _______, _______, _______, _______ \ */
   /* ), */
   [_FN] = LAYOUT( \
-   KC_GRAVE,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, _______, _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, _______, \
+   KC_GRAVE,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5, _______, _______,   KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_DEL, \
     _______, KC_PGUP,   KC_UP, KC_PGDN,  KC_F11,  KC_F12, _______, _______, _______, KC_PGUP,   KC_UP, KC_PGDN, KC_LBRC, KC_RBRC, \
     KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END , _______, _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT,  KC_END,  KC_END, \
     _______, KC_MPRV, KC_MNXT, KC_MPLY, KC_VOLD, KC_VOLU, _______, _______, _______, _______, _______, _______, _______, _______, \
