@@ -323,6 +323,8 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     /* 2        |        X */
     /* 1, 0     |    3 , X */
 
+    clockwise = !clockwise;
+    
     bool volume_mode = layer_state_is(_ENC_VOLUME);
     if (!layer_state_is(_ENC_MOUSE)) {
         /* No other modes: default to volume mode */
