@@ -44,5 +44,10 @@ OLED_TIMEOUT            = 0
 #MORE GENERAL SETTINGS:
 DYNAMIC_MACRO_ENABLE = yes
 
+# Custom animations
+RGB_MATRIX_CUSTOM_USER = yes
+
+# TAP_DANCE_ENABLE = yes
+
 # Do not edit past here
 include keyboards/$(KEYBOARD)/post_rules.mk

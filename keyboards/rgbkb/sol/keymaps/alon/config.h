@@ -34,3 +34,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MK_C_OFFSET_0 4
 #define MK_C_OFFSET_1 32
 #define MK_C_OFFSET_2 64
+
+
+#ifdef TAPPING_TERM
+#undef TAPPING_TERM
+#endif
+// Fast typing attempts:
+#define TAPPING_TERM 164
+#define PREVENT_STUCK_MODIFIERS
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
+#define TAPPING_FORCE_HOLD
+
