@@ -24,10 +24,12 @@ static bool my_cool_effect(effect_params_t* params) {
 // dedicated init and run methods
 static uint8_t some_global_state;
 static uint8_t some_global_state2;
+static uint8_t some_global_state3;
 static uint8_t val;
 static void my_cool_effect2_complex_init(effect_params_t* params) {
   some_global_state = 1;
   some_global_state2 = 0;
+  some_global_state3 = 0;
   val = 0;
 }
 static bool my_cool_effect2_complex_run(effect_params_t* params) {
@@ -39,22 +41,29 @@ static bool my_cool_effect2_complex_run(effect_params_t* params) {
       /* if (i == 69+24 or 38) { */
       if (i == 87) {
           /* rgb_matrix_set_color(i, 2*val, val, 80-val); */
-          some_global_state += 73;
+          some_global_state3 += 1;
+          if (some_global_state3 % 3 == 0) {
+              some_global_state += 23;
+          } else if (some_global_state3 % 2 == 0) {
+              /* some_global_state += 73; */
+          } else {
+              some_global_state += 73;
+          }
           val = some_global_state/10;
           rgb_matrix_set_color(i, v*3*val, v*(20+val), v*(111-2*val));
       } else if (i == 86) {
           val = some_global_state/34;
-          rgb_matrix_set_color(i, v*2*val, v*val, v*(40-val));
+          rgb_matrix_set_color(i, v*0.5*val, v*val, v*(40-val));
       } else if (i > 77 && i < 95) {
           some_global_state2 += rand();
           if (some_global_state2 % 283 == 0) {
               val = some_global_state/34;
               rgb_matrix_set_color(i, v*2*val, v*val, v*(77-val));
           } else {
-              rgb_matrix_set_color(i, v*0x00, v*0x00, v*0x07);
+              rgb_matrix_set_color(i, v*0x00, v*0x00, v*0x06);
           }
       } else {
-          rgb_matrix_set_color(i, v*0x00, v*0x00, v*0x07);
+          rgb_matrix_set_color(i, v*0x00, v*0x00, v*0x06);
       }
   }
 
